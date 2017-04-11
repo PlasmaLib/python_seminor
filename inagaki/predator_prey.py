@@ -1,19 +1,43 @@
 #!/usr/bin/env python
+"""
+    Sample Code
 
+    Status
+    ------
+    Version 1.0
+
+    Authour
+    -------
+    Shigeru Inagaki                                       
+    Research Institute for Applied Mechanics 
+    inagaki@riam.kyushu-u.ac.jp  
+    
+    Revision History
+    ----------------
+    [11-April-2017] Creation
+
+    Copyright
+    ---------
+    2017 Shigeru Inagaki (inagaki@riam.kyushu-u.ac.jp)
+    Released under the MIT, BSD, and GPL Licenses.
+
+"""
 import numpy as np
 import scipy.integrate as desol
 import matplotlib.pyplot as plt
 
 def predator_prey(f, t, a, b, c, d):
-    #
-    #  dx/dt = ax - bxy
-    #  dy/dt = cxy - dy
-    #
-    #  f[0]    - x: Population of prey
-    #  f[1]    - y: Population of predetor
-    #  t       - Time
-    #  a,b,c,d - Control parameters
-    #
+    """ return left hand sides of ordinary differential equations
+
+        model equation:
+            dx/dt = ax - bxy
+            dy/dt = cxy - dy
+
+    f[0]    - x: Population of prey
+    f[1]    - y: Population of predator
+    t       - Time
+    a,b,c,d - Control parameters
+    """
     return [a*f[0]-b*f[0]*f[1], c*f[0]*f[1]-d*f[1]]
 
 
@@ -34,10 +58,10 @@ header = r"$a={0:.1f}, b={1:.1f}, c={2:.1f}, d={3:.1f}$".format(a, b, c, d)
 f0 = [1.0, 0.1]
 
 #independent variable
-nt   = 1000
+nt = 1000
 tmax = 30.0
-dt = tmax/nt
-t  = dt*np.arange(nt)
+dt = tmax / nt
+t = dt * np.arange(nt)
 
 f = desol.odeint(predator_prey, f0, t, args=(a,b,c,d))
 
