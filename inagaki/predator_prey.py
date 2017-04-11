@@ -1,26 +1,25 @@
 #!/usr/bin/env python
 """
-    Sample Code
+Sample Code
 
-    Status
-    ------
-    Version 1.0
+Status
+------
+Version 1.0
 
-    Authour
-    -------
-    Shigeru Inagaki                                       
-    Research Institute for Applied Mechanics 
-    inagaki@riam.kyushu-u.ac.jp  
-    
-    Revision History
-    ----------------
-    [11-April-2017] Creation
+Authour
+-------
+Shigeru Inagaki
+Research Institute for Applied Mechanics
+inagaki@riam.kyushu-u.ac.jp
 
-    Copyright
-    ---------
-    2017 Shigeru Inagaki (inagaki@riam.kyushu-u.ac.jp)
-    Released under the MIT, BSD, and GPL Licenses.
+Revision History
+----------------
+[11-April-2017] Creation
 
+Copyright
+---------
+2017 Shigeru Inagaki (inagaki@riam.kyushu-u.ac.jp)
+Released under the MIT, BSD, and GPL Licenses.
 """
 import numpy as np
 import scipy.integrate as desol
@@ -63,7 +62,7 @@ tmax = 30.0
 dt = tmax / nt
 t = dt * np.arange(nt)
 
-f = desol.odeint(predator_prey, f0, t, args=(a,b,c,d))
+f = desol.odeint(predator_prey, f0, t, args=(a, b, c, d))
 
 #plot
 prey = f[:,0]
