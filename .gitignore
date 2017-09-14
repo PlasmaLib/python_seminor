@@ -73,3 +73,7 @@ archive_notebooks
 
 # memo for codeship setting
 codeship_settings.txt
+
+# sphinx directories
+_build
+_static
