@@ -1,0 +1,165 @@
+\section{Jupyter-notebook}
+
+Jupyter-notebook\cite{jupyter}は、
+対話的プログラミング環境を提供するオープンソース・ソフトウェアである。
+%
+\begin{enumerate}
+  \item 実行結果を可視化しながらデータ解析を進めることができる
+  \item ソースコード、実行結果、数式、文書を１つのファイルに保存することができる
+\end{enumerate}
+%
+などが特徴である。
+% 歴史
+元々は{\ttfamily IPython}というPythonの対話的プログラム環境の一部の
+{\ttfamily IPython-notebook}として開発が進められてきたが、
+%
+現在はPythonに限らず、
+{\ttfamily Julia, R, ruby}などで利用可能なソフトウェアとして開発が続けられている。
+
+%
+ソースコードの実行結果をすぐに可視化できることは、
+効率的なデータ解析に有効なだけでなく、
+プログラムスキルを身に付けるためにも非常に効果的である。
+
+本講座で紹介したPython環境の１つであるAnacondaにはすでにJupyter-notebookは含まれており、
+前章に従って環境を整えた読者はすぐに利用が可能である。
+さらに、インストールがされていない環境からもその使用感が体験できるサービスが用意されている。
+%
+本章では、上記サービスを用いてその使用感を概観したあと、
+インストール方法や詳しい使い方を紹介するとともに、それを通してPythonの文法や使い勝手を学ぶ。
+
+
+\subsection{Jupyter-notebookを体験する\label{subsec:experiencing}}
+ウェブブラウザで
+\url{https://try.jupyter.org/}
+にアクセスすると、図＊のようなページが表示される。
+
+右上の {\ttfamily New} から {\ttfamily Python 3} を選択すると、
+新しいノートブックファイルが作成され、図*のようなページが開かれる。
+
+Jupyter-notebook では、セルと呼ばれるボックス内にスクリプトを入力する。
+スクリプトはセル単位で実行することができる。
+まずは、図*にあるように、ひとつ目のセルに以下を入力してみよう。
+
+{\ttfamily
+print('Hello world!')
+}
+
+このセルを実行するためには、再生ボタンを押すか、
+キーボードの Shift + Enter を同時に押下する。
+%
+実際に実行すると、入力したセルの下に"Hello world!" が表示される。
+C言語などのコンパイル言語では、{\ttfamily pring}文を実行するためにも
+ソースコードの作成、コンパイル、実行が必要なことに比べて、
+非常に簡潔であることが理解できると思う。
+
+内容は後ほど説明するが、図＊のように以下の内容を入力してみよう。
+
+\noindent
+{\ttfamily
+import numpy as np
+import matplotlib.pyplot as plt
+}
+
+\noindent
+{\ttfamily
+x = np.linspace(-1,1,21)
+print(x)
+}
+
+\noindent
+{\ttfamily
+y = np.exp(-x*x / 0.2)
+print(y)
+}
+
+\noindent
+{\ttfamily
+plt.plot(x, y)
+}
+
+%
+このように、変数などの状態を簡単に確認しながら、
+プログラムを開発できる環境を対話的開発環境と言う。
+Jupyter-notebookを用いると、
+データの内容を簡単に可視化しながら開発をすすめることができる。
+そのため、Jupyter-notebook は
+特に試行錯誤が必要なデータサイエンスの分野などで急速に広まっているソフトウェアである。
+
+\section{Jupyter-notebookのインストール}
+本講座で紹介したPython環境の１つであるAnacondaには、
+すでにJupyter-notebookが含まれている。
+%
+インストールされていない別の環境などはターミナルから
+
+\noindent
+{\ttfamily
+pip install jupyter-notebook
+}
+
+を実行することでインストールできる。
+% TODO ソースの表示
+
+
+\section{Jupyter-notebookの起動と終了}
+\subsection{Windowsでの起動}
+WindowsからJupyter-notebookを起動するための手順は、以下のとおりである。
+\begin{enumerate}
+  \item コマンドプロンプトを立ち上げる
+  (必要に応じてディレクトリに移動する)
+  \item 起動コマンド{\ttfamily jupyter-notebook}を入力する
+\end{enumerate}
+これにより、自動的にブラウザが立ち上がり、Jupyter-notebookのホーム画面が表示される。
+
+%図\ref{fig:launch_in_windows}
+
+\subsection{Mac、Linuxでの起動}
+Mac, Linuxの場合も同様に
+\begin{enumerate}
+  \item ターミナルを立ち上げる
+  (必要に応じてディレクトリに移動する)
+  \item 起動コマンド{\ttfamily jupyter-notebook}を入力する
+\end{enumerate}
+
+上記操作を行うことで、図＊のような画面がブラウザに表示される。
+なお、ブラウザを誤って閉じてしまった場合も、
+
+\noindent
+{\ttfamily
+http://localhost:8888
+}
+にアクセスすることで、Jupyer-notebookのホーム画面にアクセスできる。
+
+
+\subsection{ノートブックファイルの新規作成}
+表示されているホーム画面は、Jupyter-notebook を起動したディレクトリがツリー表示される。
+フォルダ間の移動、ファイル・フォルダの名前の新規作成・名前の変更・削除など、
+シンプルなファイル操作は一通りできるようになっている。
+
+ディレクトリを適宜移動すれば、ノートブックファイルを新たに作成して学習を始めよう。
+
+\ref{subsec:experiencing} 節のように、
+右上の {\ttfamily New} から {\ttfamily Python 3} を選択すると、
+新しいノートブックファイルが作成され、図*のようなページが開かれる。
+
+作成されるファイルはデフォルトでは {\ttfamily Untitled} であるので、
+図* のタイトルをクリックしてファイル名を変更しよう。
+ここでは、{\ttfamily python_tutorial}と変更した。
+
+\subsection{Jupyter-notebook の終了}
+カーネルの終了とJupyter-notebook 自体の終了の2つがある。
+% TODO カーネルの説明
+カーネルとはPythonの実行＊＊のことであり、オブジェクトの内容を格納していたり、
+何か計算をしていたりする部分のことである。
+カーネルを終了するには、ツールバーの {\ttfamily File > Close and halt} を実行する。
+もしくは、
+Jupyter-notebook ホーム画面で {\ttfamily running} タブを見ると、
+カーネルが実行中であるノートブックファイル一覧が表示されるため、そこで {\ttfamily shutdown}
+ボタンを押す。
+%
+こうすることで、メモリ内に格納されているデータなどが消去される。
+
+Jupyter-notebook 自体を終了するには起動したコマンドプロンプトもしくはターミナルにて
+Ctrl+C を実行する。
+
+%図\ref{fig:launch_in_mac}
