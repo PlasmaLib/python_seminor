@@ -119,6 +119,14 @@ html_theme = 'alabaster'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# Sometimes the savefig directory doesn't exist and needs to be created
+# https://github.com/ipython/ipython/issues/8733
+# becomes obsolete when ipython 5.2 is out
+import os
+ipython_savefig_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   '_build','html','_static')
+if not os.path.exists(ipython_savefig_dir):
+    os.makedirs(ipython_savefig_dir)
 
 # -- Options for HTMLHelp output ------------------------------------------
 
