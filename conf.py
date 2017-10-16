@@ -39,8 +39,24 @@ extensions = ['matplotlib.sphinxext.only_directives',
               'sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.inheritance_diagram',
-              'numpydoc'
               ]
+
+# Determine if the matplotlib has a recent enough version of the
+# plot_directive, otherwise use the local fork.
+try:
+    from matplotlib.sphinxext import plot_directive
+except ImportError:
+    use_matplotlib_plot_directive = False
+else:
+    try:
+        use_matplotlib_plot_directive = (plot_directive.__version__ >= 2)
+    except AttributeError:
+        use_matplotlib_plot_directive = False
+
+if use_matplotlib_plot_directive:
+    extensions.append('matplotlib.sphinxext.plot_directive')
+else:
+    extensions.append('plot_directive')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -55,7 +71,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'jupyter-notebook'
+project = 'python-tutorial'
 copyright = '2017, Keisuke Fujii'
 author = 'Keisuke Fujii'
 
@@ -136,7 +152,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'jupyter-notebook.tex', 'jupyter-notebook Documentation',
+    (master_doc, 'python-tutorial.tex', 'python-tutorial',
      'Keisuke Fujii', 'manual'),
 ]
 
@@ -146,7 +162,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'jupyter-notebook', 'jupyter-notebook Documentation',
+    (master_doc, 'python-tutorial', 'python-tutorial',
      [author], 1)
 ]
 
@@ -157,7 +173,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'jupyter-notebook', 'jupyter-notebook Documentation',
-     author, 'jupyter-notebook', 'One line description of project.',
+    (master_doc, 'python-tutorial', 'python-tutorial',
+     author, 'Keisuke Fujii', 'One line description of project.',
      'Miscellaneous'),
 ]
