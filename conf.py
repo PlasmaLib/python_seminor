@@ -32,7 +32,6 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['matplotlib.sphinxext.only_directives',
-              'matplotlib.sphinxext.plot_directive',
               'IPython.sphinxext.ipython_directive',
               'IPython.sphinxext.ipython_console_highlighting',
               'sphinx.ext.mathjax',
@@ -40,6 +39,22 @@ extensions = ['matplotlib.sphinxext.only_directives',
               'sphinx.ext.doctest',
               'sphinx.ext.inheritance_diagram',
               ]
+# Determine if the matplotlib has a recent enough version of the
+# plot_directive, otherwise use the local fork.
+try:
+    from matplotlib.sphinxext import plot_directive
+except ImportError:
+    use_matplotlib_plot_directive = False
+else:
+    try:
+        use_matplotlib_plot_directive = (plot_directive.__version__ >= 2)
+    except AttributeError:
+        use_matplotlib_plot_directive = False
+
+if use_matplotlib_plot_directive:
+    extensions.append('matplotlib.sphinxext.plot_directive')
+else:
+    extensions.append('plot_directive')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
