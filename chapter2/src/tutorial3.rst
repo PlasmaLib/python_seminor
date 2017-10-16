@@ -61,4 +61,9 @@ Jupyter-notebookなどの開発環境では、
     @savefig tutorial3_plot1.png width=4in
     plt.plot(x, y)
 
+.. image:: ../../savefig/tutorial3_plot1.png
+    :width: 4in
+    :target: ../../savefig/tutorial3_plot1.png
+
+
 のように、引数にオブジェクトを渡すことで実行できる。

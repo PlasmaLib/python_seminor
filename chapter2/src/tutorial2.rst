@@ -187,6 +187,9 @@ matplotlib パッケージの中の pyplot モジュールを plt という名�
   @savefig tutorial2_plot1.png width=4in
   plt.plot(y)
 
+.. image:: ../../savefig/tutorial2_plot1.png
+    :width: 4in
+    :target: ../../savefig/tutorial2_plot1.png
 
 plt.plot の引数に１次元データを渡すことで、
 横軸が要素番号、縦軸が要素の値のグラフを描画できる。
@@ -197,6 +200,10 @@ x軸を指定するには、
 
   @savefig tutorial2_plot2.png width=4in
   plt.plot(x, y, '-o')
+
+.. image:: ../../savefig/tutorial2_plot2.png
+    :width: 4in
+    :target: ../../savefig/tutorial2_plot2.png
 
 というように、x軸の値とy軸の値を引数として渡す。
 なお、３つ目の引数には描画の様式を指定する。ここで、’-o’を渡すと、

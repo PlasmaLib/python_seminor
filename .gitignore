@@ -77,3 +77,4 @@ codeship_settings.txt
 # sphinx directories
 _build
 _static
+savefig
