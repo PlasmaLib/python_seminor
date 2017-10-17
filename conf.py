@@ -31,13 +31,30 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['IPython.sphinxext.ipython_directive',
+extensions = ['matplotlib.sphinxext.only_directives',
+              'IPython.sphinxext.ipython_directive',
               'IPython.sphinxext.ipython_console_highlighting',
               'sphinx.ext.mathjax',
               'sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.inheritance_diagram',
               ]
+# Determine if the matplotlib has a recent enough version of the
+# plot_directive, otherwise use the local fork.
+try:
+    from matplotlib.sphinxext import plot_directive
+except ImportError:
+    use_matplotlib_plot_directive = False
+else:
+    try:
+        use_matplotlib_plot_directive = (plot_directive.__version__ >= 2)
+    except AttributeError:
+        use_matplotlib_plot_directive = False
+
+if use_matplotlib_plot_directive:
+    extensions.append('matplotlib.sphinxext.plot_directive')
+else:
+    extensions.append('plot_directive')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -102,6 +119,14 @@ html_theme = 'alabaster'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# Sometimes the savefig directory doesn't exist and needs to be created
+# https://github.com/ipython/ipython/issues/8733
+# becomes obsolete when ipython 5.2 is out
+import os
+ipython_savefig_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   '_build','html','_static')
+if not os.path.exists(ipython_savefig_dir):
+    os.makedirs(ipython_savefig_dir)
 
 # -- Options for HTMLHelp output ------------------------------------------
 

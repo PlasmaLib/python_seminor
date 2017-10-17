@@ -1,4 +1,4 @@
-name: xarray-docs
+name: purakaku-python
 channels:
   - conda-forge
   - defaults

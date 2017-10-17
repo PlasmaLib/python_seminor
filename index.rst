@@ -3,20 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-対話的開発環境 Jupyter-notebook
+対話的開発環境と Python の基本的な文法
 =======================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   chapter2/src/introduction.rst
-   chapter2/src/tutorial.rst
-   chapter2/src/tutorial2.rst
-   chapter2/src/tutorial3.rst
-   chapter2/src/tutorial4.rst
-   chapter2/src/tutorial5.rst
-   chapter2/src/summary.rst
+   chapter2/introduction.rst
+   chapter2/tutorial.rst
+   chapter2/tutorial2.rst
+   chapter2/tutorial3.rst
+   chapter2/tutorial4.rst
+   chapter2/tutorial5.rst
+   chapter2/summary.rst
 
 
 Numpy の使い方
