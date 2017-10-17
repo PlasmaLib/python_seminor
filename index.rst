@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-対話的開発環境 Jupyter-notebook
+対話的開発環境と Python の基本的な文法
 =======================================
 
 .. toctree::
