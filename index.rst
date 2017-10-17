@@ -10,6 +10,7 @@
    :maxdepth: 2
    :caption: Contents:
 
+   chapter2/preface.rst
    chapter2/introduction.rst
    chapter2/tutorial.rst
    chapter2/tutorial2.rst
