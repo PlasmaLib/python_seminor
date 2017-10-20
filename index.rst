@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-対話的開発環境と Python の基本的な文法
-=======================================
+=============================
+今日から始めるPython
+=============================
 
 .. toctree::
    :maxdepth: 2
@@ -18,13 +19,7 @@
    chapter2/tutorial4.rst
    chapter2/tutorial5.rst
    chapter2/summary.rst
+   chapter2/references.rst
 
 
-Numpy の使い方
-============================================
-
-.. toctree::
-  :maxdepth: 2
-  :caption: Contents:
-
-  chapter3/src/introduction.rst
+   ‥ chapter3/src/introduction.rst
