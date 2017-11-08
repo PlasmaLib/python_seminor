@@ -100,6 +100,7 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+numfig = True
 
 # -- Options for HTML output ----------------------------------------------
 
@@ -131,35 +132,71 @@ if not os.path.exists(ipython_savefig_dir):
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'jupyter-notebookdoc'
+htmlhelp_basename = 'You\'re one of Pythonistas from today'
 
 
 # -- Options for LaTeX output ---------------------------------------------
 
+language = 'ja'
+
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
+    'papersize': 'a4paper',
+    'fontpkg': '',
+    'fncychap': '',
+    'preamble': '''
+\\renewcommand{\\baselinestretch}{0.8}
+\\pagestyle{plain}
+\\thispagestyle{plain}
+\\setcounter{secnumdepth}{3}
 
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
+\\makeatletter
+\\renewcommand{\maketitle}{
+  \\ifsphinxpdfoutput
+    \\begingroup
+      \\def\\\\{, }
+      \\def\\and{and }
+      \\pdfinfo{
+        /Author (\\@author)
+        /Title (\\@title)
+      }
+    \\endgroup
+  \\fi
+  \\begin{center}
+    \\sphinxlogo%
+    {\\Large \\@title} \\par
+  \\end{center}
+  \\begin{flushright}
+    \\@date \\hspace{3zw} \\@author \\par
+    \\py@authoraddress \\par
+  \\end{flushright}
+  \\@thanks
+  \\setcounter{footnote}{0}
+  \\let\\thanks\\relax\\let\\maketitle\\relax
+}
+\\makeatother
 
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
+\\let\\pyOldTableofcontents=\\tableofcontents
+\\renewcommand{\\tableofcontents}{
+  \\begingroup
+  \\parskip = 0mm
+  \\pyOldTableofcontents
+  \\endgroup
+  \\vspace{12pt}
+}
+''',
+}
 
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
+latex_docclass = {
+    'howto': 'jsarticle',
+    'manual': 'jsbook',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'jupyter-notebook.tex', 'jupyter-notebook Documentation',
-     'Keisuke Fujii', 'manual'),
+    (master_doc, 'Pythonistas.tex', 'You\'re one of Pythonistas from today',
+     'Keisuke Fujii', 'howto'),
 ]
 
 
@@ -168,10 +205,9 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'jupyter-notebook', 'jupyter-notebook Documentation',
+    (master_doc, 'You\'re one of Pythonistas from today', '',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -179,7 +215,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'jupyter-notebook', 'jupyter-notebook Documentation',
-     author, 'jupyter-notebook', 'One line description of project.',
+    (master_doc, 'You\'re one of Pythonistas from today', '',
+     author, 'You\'re one of Pythonistas from today', '',
      'Miscellaneous'),
 ]
