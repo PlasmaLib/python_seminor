@@ -35,3 +35,4 @@ Pythonによる科学技術計算
   :caption: Contents:
 
   chapter3/index.rst
+  chapter_ml/index.rst
