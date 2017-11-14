@@ -5,89 +5,25 @@ Pythonは簡単に始めることのできる言語です。
 これまでプログラミングにほとんど触れたことのない人でも数クリックで環境構築を完了し、
 数分でグラフ描画までできることが特徴です。
 さらに、多様なパッケージが公開されており、最先端のデータ操作を行うことも可能です。
-ここでは、Pythonの使用法を簡単に体験した後、Python開発環境の構築法を紹介します。
+ここではPython開発環境の構築法を紹介します。
 さらに、少し発展的な話題として、外部パッケージを新しくインストールする方法、
 Python開発環境を一つのPC内に複数構築する方法について述べることにします。
 
+Python is one of the easiest programming languages for beginners.
+Even with little programming experience, one can build a Python
+programming environment within a few clicks
+and even can draw a figure within a few minutes.
+In addition, as various open-source libraries are available in Python,
+it is easy to use state-of-the-art data analysis tools.
+Here, we describe how to construct your own programming enbironment for Python.
+Addition to it, as advanced topics,
+we also briefly introduce how to install a new package to your environment
+and how to build multiple virtual environments for Python programming in one PC.
 
+Keywords
+---------
 
-Pythonを体験する
-=======================
-
-Pythonは簡単に始めることのできる言語です。ここではまず、その使用感を体験してみましょう。
-ウェブブラウザで https://try.jupyter.org/ にアクセスしてください。
-:numref:`try_jupyter` のようなページが表示されると思います。
-このページは、次節で紹介する Jupyter-notebook という対話型のPython開発環境を体験することのできるサービスです。
-右上の New ボタンから Python 3 を選択すると、
-新しいノートブックファイルが作成され、:numref:`hello_world` のような新しいノートブックページが開かれます。
-
-.. figure:: figs/try_jupyter.png
-   :scale: 50 %
-   :alt: home of try-jupyter
-   :name: try_jupyter
-
-   http://try.jupyter.org のトップ画面。右上の New ボタンから新しいノートブックファイルを作成できます。
-
-.. figure:: figs/try_jupyter_hello_world.png
-   :scale: 50 %
-   :alt: blank notebook
-   :name: hello_world
-
-   新しいノートブックファイルを作成したときの様子。
-   ひとつ目のセルに ``print('Hello world!')`` と入力しています。
-
-Jupyter-notebook では、セルと呼ばれるボックス内にスクリプトを入力します。
-まずは :numref:`hello_world` にあるように、ひとつ目のセルに以下を入力してみましょう。
-
-.. code-block:: python
-
-  print('Hello world!')
-
-このセルを実行するためには、再生ボタンを押すか、
-キーボードの Shift + Enter を同時に押下してください。
-
-実際に実行すると、入力したセルの下に"Hello world!" が表示されると思います。
-C言語などのコンパイル言語でこのような命令を実行するためには、
-まずは完全なソースコードを作成し、コンパイルして実行ファイルを生成することが必要です。
-一方でインタープリタ言語である Python ではコンパイル作業が不要であるほか、
-開発途中のソースコードでも途中まで実行できる点が特徴です。
-
-内容は後ほど説明するので、まずは :numref:`try_plot` のように以下の内容を入力してみてください。
-上記では、ベクトル変数 x と y を定義し、
-その内容を画面に表示したあと、グラフに描画しています。
-
-.. figure:: figs/try_jupyter_plot.png
-   :scale: 50 %
-   :alt: example of jupyter-notebook
-   :name: try_plot
-
-   ノートブックファイルの実行例
-
-.. code-block:: python
-
-  import numpy as np
-  import matplotlib.pyplot as plt
-
-.. code-block:: python
-
-  x = np.linspace(-10,10,21)
-  x
-
-.. code-block:: python
-
-  y = np.exp(-x * x / 2)
-  y
-
-.. code-block:: python
-
-  plt.plot(x, y)
-
-詳しい使い方は次節で紹介しますが、Pythonではこのように、ぱっとコードを作成・実行し結果をすぐに可視化できます。
-このような特徴は、試行錯誤しなが進める研究活動を行うのに効果的なだけでなく、
-プログラムスキルを身に付けるためにも非常に効果的だと思います。
-
-もちろん、上記のような対話的な環境ではなく、一般的な言語を実行するようにコマンドのみでも実行できます。
-ではさっそく開発環境をあなたのPCにインストールしましょう。
+Python, Anaconda distribution, programming, open-source, virtual environment
 
 
 Python開発環境の構築
@@ -117,7 +53,9 @@ Windowsでの開発環境構築
 にアクセスし、Windows版 Anaconda をダウンロードします。
 なお、（残念ながら）Pythonにはバージョン2系（現在の最新は2.7）と3系（現在の最新は3.6）
 という大きく2つのバージョン系列があります。
-現在も開発続いているパッケージはほとんどが3系に対応しているため、こちらを利用することを勧めます。
+Python2.7のサポートが2020年に打ち切られることが議論されていること [pep373]_、
+現在も開発続いているパッケージはほとんどが3系に対応していることから、
+これからはバージョン3系を利用することをお勧めします。
 
 OSのbit数などに合わせたバージョン（現在では64bitシステムが一般的です）をダウンロードしてください。
 ダウンロードされたインストーラをクリックすることでインストールを開始できます。
@@ -149,10 +87,13 @@ Anaconda Prompt や Jupyter Notebook というアプリケーションがスタ�
 Python開発環境の構築は終了です。
 
 
+.. [pep373] PEP373 https://www.python.org/dev/peps/pep-0373/
+
+
 Macでの開発環境構築
 ---------------------
 
-https://www.anaconda.com/download/#macosにアクセスします。
+https://www.anaconda.com/download/#macos にアクセスします。
 執筆時点の Anaconda distribution のversion は 5.0.1です。
 ウェブサイトでリンゴの画像をクリックすると
 Python 3.6 とPython 2.7 のインストーラーが出てきますので迷わず、
@@ -258,7 +199,7 @@ Pythonの開発環境として非常に人気のあるものになっていま�
 
 Python では、言語の基本的な機能だけで実現できることは以外と少なく、
 実際にはほとんどの操作を外部のパッケージを用いて行うことになるでしょう。
-本講座でデータ解析を行う時も Numpy や Matplotlib など他のパッケージを用いることになります。
+本講座でデータ解析を行う時も Numpy や Matplotlib など外部のパッケージを用いることになります。
 
 様々なプログラミング言語のなかでも Python は特に外部パッケージが豊富であり、
 そのインストールも非常に簡単に行うことができます。
@@ -280,7 +221,7 @@ Anaconda環境でパッケージをインストールする方法は大きく2�
 - Python の持つパッケージインストールコマンド ``pip`` を用いる方法
 - Anaconda の持つパッケージインストールコマンド ``conda`` を用いる方法
 
-以下で少し触れるように、``conda`` の方が高機能でありこちらを用いるほうがよいでしょう。
+以下で少し触れるように ``conda`` の方が高機能であるため、こちらを用いるほうがよいでしょう。
 ``conda`` コマンドで新たなパッケージをインストールするためには、以下を実行してください。
 
 .. code-block:: bash
@@ -295,7 +236,8 @@ Anaconda環境でパッケージをインストールする方法は大きく2�
 
 これにより Python 環境に ``xarray`` がインストールされます。
 なお、 ``xarray`` は別のパッケージである ``pandas`` を内部で用いています
-（依存関係がある）が、そういった必要なパッケージも自動的にダウンロード・インストールされます。
+（依存関係がある）。
+``conda``コマンドでは、そういった依存関係のあるパッケージも自動的にダウンロード・インストールされます。
 
 インストールしたパッケージをバージョンアップするには
 
@@ -362,23 +304,10 @@ Anaconda によって構築した Python 開発環境は、OS内の環境とは�
 そうしてしまうと
 これまで開発してきたスクリプトが動かなくなるなどトラブルが想定されます。
 
-また、先述したとおりPythonには2系統 と 3系統の2つのバージョンが存在します。
-現行のほとんどのパッケージは両系統に対応していますが、
-開発が止まっている古いパッケージには Python2 のみしかサポートしないものもあり得ます。
-他のパッケージが動かなくなるなどが考えられるため、
-そのようなパッケージを使うためだけにPC全体のPython環境をバージョン2へ戻すのは危険です。
-
 こういった場合には、これらのプログラムを動かす環境を
 普段使っている環境と隔離した仮想環境として構築することが有効でしょう。
 ある仮想環境でインストールしたパッケージは他の環境に影響を与えないため、
 その古いパッケージ専用の仮想環境を用意すれば、安全に利用することが可能です。
-
-他にも
-
-- 自分の開発しているスクリプトが、他の環境でどのように実行されるか知りたい
-- 普段使っているものとバージョンの異なるパッケージをインストールしたい
-
-など、仮想環境が活躍するシーンは意外と多いことに気づきます。
 
 Anacondaでは、以下のコマンドを実行することで Pythonの仮想環境を構築することができます。
 
