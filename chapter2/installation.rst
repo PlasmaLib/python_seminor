@@ -1,6 +1,3 @@
-概要
-=====
-
 Pythonは簡単に始めることのできる言語です。
 これまでプログラミングにほとんど触れたことのない人でも数クリックで環境構築を完了し、
 数分でグラフ描画までできることが特徴です。
@@ -21,7 +18,6 @@ we also briefly introduce how to install a new package to your environment
 and how to build multiple virtual environments for Python programming in one PC.
 
 Keywords
----------
 
 Python, Anaconda distribution, programming, open-source, virtual environment
 

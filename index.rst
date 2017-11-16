@@ -12,7 +12,7 @@
   :numbered: 3
   :caption: Contents:
 
-
+  chapter1/preface.rst
 
 =============================
 Pythonスタートアップガイド

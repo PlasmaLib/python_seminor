@@ -1,8 +1,4 @@
 
-
-概要
-=====
-
 本節では、Jupyter-notebook [1]_ という対話的プログラミング環境を用いて、
 Python の基本的な文法を学びます。
 対話的プログラミング環境では、命令の実行結果がすぐに可視化されます。
@@ -30,6 +26,5 @@ as to execute the script, observe the results, and then try to understand what t
 
 
 Keywords
----------
 
 Python, Jupyter-notebook, programming, tutorial
