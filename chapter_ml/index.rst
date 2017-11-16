@@ -1,5 +1,5 @@
 -----------------------------------------------
-対話的開発環境を用いたPython入門
+Python を用いたデータ解析
 -----------------------------------------------
 
 .. toctree::
@@ -7,6 +7,7 @@
    :numbered: 3
    :caption: Contents:
 
-   preface.rst
    introduction.rst
    pandas_xarray.rst
+   scikit_learn.rst
+   cupy.rst

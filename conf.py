@@ -149,30 +149,6 @@ latex_elements = {
 \\thispagestyle{plain}
 \\setcounter{secnumdepth}{3}
 
-\\makeatletter
-\\renewcommand{\maketitle}{
-  \\ifsphinxpdfoutput
-    \\begingroup
-      \\def\\\\{, }
-      \\def\\and{and }
-      \\pdfinfo{
-        /Author (\\@author)
-        /Title (\\@title)
-      }
-    \\endgroup
-  \\fi
-  \\begin{center}
-    \\sphinxlogo%
-    {\\Large \\@title} \\par
-  \\end{center}
-  \\begin{flushright}
-    \\@date \\hspace{3zw} \\@author \\par
-    \\py@authoraddress \\par
-  \\end{flushright}
-  \\@thanks
-  \\setcounter{footnote}{0}
-  \\let\\thanks\\relax\\let\\maketitle\\relax
-}
 \\makeatother
 
 \\let\\pyOldTableofcontents=\\tableofcontents

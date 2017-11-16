@@ -14,7 +14,7 @@ from copy import deepcopy
 from datetime import datetime
 import xarray as xr
 
-def load(filename, **overwrite_params):
+def load(filename, with_attrs=False, **overwrite_params):
     """
     Load eg-file and returns as xarray.DataSet.
 
@@ -159,7 +159,8 @@ def load(filename, **overwrite_params):
         if key not in ['DimName', 'DimNo', 'ValName', 'ValNo', 'DimSize',
                        'DimUnit', 'ValUnit', 'ShotNo']:
             attrs[key] = item
-    attrs.update(comments)
+    if with_attrs:
+        attrs.update(comments)
 
     ds = xr.Dataset(result, coords=coords, attrs=attrs)
 
