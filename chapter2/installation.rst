@@ -343,19 +343,6 @@ Mac, Linuxでは以下を実行してください。
 
 なお、上記コマンドで作成した仮想環境には、Numpyなどのパッケージはインストールされていません。
 以下に述べた方法によりパッケージのインストール・アンインストールすることが必要です。
-Numpyなどの基本的なパッケージ群は以下のコマンドで一括してインストールすることが可能です。
-
-.. code-block:: bash
-
-  conda install anaconda
-
-.. figure:: figs/conda_install_anaconda.png
- :scale: 50 %
- :alt: conda install anaconda
-
- 基本的なパッケージ群をインストールする
- ``conda install anaconda`` を仮想環境 py27 において実行している様子。
-
 
 なお、この仮想環境を非アクティブ化するには
 Windowsでは以下を
