@@ -7,6 +7,8 @@
 はじめに
 =============================
 
+**Preface**
+
 .. toctree::
   :maxdepth: 3
   :numbered: 3
@@ -17,6 +19,8 @@
 =============================
 Pythonスタートアップガイド
 =============================
+
+**Python start-up guide**
 
 .. toctree::
    :maxdepth: 3

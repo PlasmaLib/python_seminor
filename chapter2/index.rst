@@ -2,6 +2,9 @@
 Pythonのインストールとパッケージマネージングシステム
 -----------------------------------------------
 
+**Installation of Python programming environment and its package management system**
+
+
 .. toctree::
    :maxdepth: 3
    :numbered: 3
@@ -12,6 +15,8 @@ Pythonのインストールとパッケージマネージングシステム
 -----------------------------------------------
 対話的開発環境を用いたPython入門
 -----------------------------------------------
+
+**Python tutorial with an interactive programming environment**
 
 .. toctree::
    :maxdepth: 3
