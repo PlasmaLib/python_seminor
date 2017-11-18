@@ -1,4 +1,8 @@
 
+  **藤井 恵介 Keisuke FUJII**
+
+  **京都大学 工学研究科**
+
 本節では、Jupyter-notebook [1]_ という対話的プログラミング環境を用いて、
 Python の基本的な文法を学びます。
 対話的プログラミング環境では、命令の実行結果がすぐに可視化されます。
@@ -10,21 +14,8 @@ Python の基本的な文法を学びます。
 これからPythonの使用法を学ぶという読者も、まずは本文に示すようにコードを実行してその結果を観察し、
 そこからその内容を理解する、といった体験型の学習をお勧めします。
 
-In this section, we show a basic usage of Python programming language with
-one of interactive programming environments, Jupyter-notebook [1]_.
-In an interactive programming environment, your code is immediately executed
-the results is quickly visualized.
-This behavior is so intuitive that it is useful not only for data-analysis requiring a lot of trials and error
-but also for beginners acquiring programming skills.
-
-Rather than cumulating the strict grammers of Python language,
-we first show a executable script and then explain what the script does.
-We recommend the experiential learning to Python biginners,
-as to execute the script, observe the results, and then try to understand what this does.
 
 .. [1] project jupyter http://jupyter.org/
 
 
-Keywords
-
-Python, Jupyter-notebook, programming, tutorial
+Keywords: Python, Jupyter-notebook, programming, tutorial

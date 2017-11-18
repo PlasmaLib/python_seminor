@@ -171,8 +171,9 @@ latex_docclass = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Pythonistas.tex', 'You\'re one of Pythonistas from today',
-     'Purakaku Python-tutorial editorial committee', 'manual'),
+    (master_doc, 'Pythonistas.tex',
+    '今日からはじめるPython \\\\ You\'re one of Pythonistas from today',
+     '今日から始めるPython 編集委員会', 'manual'),
 ]
 
 
@@ -191,7 +192,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'You\'re one of Pythonistas from today', '',
-     author, 'You\'re one of Pythonistas from today', '',
+    (master_doc, '今日から始めるPython', '',
+     author, '今日から始めるPython', '',
      'Miscellaneous'),
 ]

@@ -1,3 +1,8 @@
+
+  **藤井 恵介 Keisuke FUJII**
+
+  **京都大学 工学研究科**
+
 Pythonは簡単に始めることのできる言語です。
 これまでプログラミングにほとんど触れたことのない人でも数クリックで環境構築を完了し、
 数分でグラフ描画までできることが特徴です。
@@ -6,20 +11,7 @@ Pythonは簡単に始めることのできる言語です。
 さらに、少し発展的な話題として、外部パッケージを新しくインストールする方法、
 Python開発環境を一つのPC内に複数構築する方法について述べることにします。
 
-Python is one of the easiest programming languages for beginners.
-Even with little programming experience, one can build a Python
-programming environment within a few clicks
-and even can draw a figure within a few minutes.
-In addition, as various open-source libraries are available in Python,
-it is easy to use state-of-the-art data analysis tools.
-Here, we describe how to construct your own programming enbironment for Python.
-Addition to it, as advanced topics,
-we also briefly introduce how to install a new package to your environment
-and how to build multiple virtual environments for Python programming in one PC.
-
-Keywords
-
-Python, Anaconda distribution, programming, open-source, virtual environment
+Keywords: Python, Anaconda distribution, programming, open-source, virtual environment
 
 
 Python開発環境の構築
@@ -49,12 +41,13 @@ Windowsでの開発環境構築
 にアクセスし、Windows版 Anaconda をダウンロードします。
 なお、（残念ながら）Pythonにはバージョン2系（現在の最新は2.7）と3系（現在の最新は3.6）
 という大きく2つのバージョン系列があります。
-Python2.7のサポートが2020年に打ち切られることが議論されていること [pep373]_、
+Python2.7のサポートが2020年に打ち切られることが議論されていること [2]_ 、
 現在も開発続いているパッケージはほとんどが3系に対応していることから、
 これからはバージョン3系を利用することをお勧めします。
 
 OSのbit数などに合わせたバージョン（現在では64bitシステムが一般的です）をダウンロードしてください。
 ダウンロードされたインストーラをクリックすることでインストールを開始できます。
+
 
 .. figure:: figs/anacond_setup1.png
    :scale: 50 %
@@ -83,8 +76,7 @@ Anaconda Prompt や Jupyter Notebook というアプリケーションがスタ�
 Python開発環境の構築は終了です。
 
 
-.. [pep373] PEP373 https://www.python.org/dev/peps/pep-0373/
-
+.. [2] PEP373 https://www.python.org/dev/peps/pep-0373/
 
 Macでの開発環境構築
 ---------------------
