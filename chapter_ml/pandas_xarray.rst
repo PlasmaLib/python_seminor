@@ -6,7 +6,7 @@ pandas と xarray
 
   import matplotlib.pyplot as plt
 
-Pythonの有名なデータ解析ライブラリに pandas [pandas]_ があります。
+Pythonの有名なデータ解析ライブラリに pandas [1]_ があります。
 pandas は、汎用的なのデータ解析に関するインターフェースを提供するものです。
 その注目すべき特徴の1つが、座標付きのデータ（labeled data）をうまく扱うことができる点です。
 
@@ -25,13 +25,13 @@ pandasはアンケート結果や株価の推移など、一般のデータ解�
 例えば、電子温度分布の時間変化データは、計測位置と時間という2つの軸を持つことになります。
 ある時間における分布が知りたかったり、ある位置の温度の時間変化が知りたかったりします。
 しかし pandas は1次元のデータ（表に表すことのできるデータ）しか扱うことができません。
-xarray [xarray]_, [xarray_paper]_ は、 pandas を多次元データに拡張したもので、地球科学研究分野から生まれたものです。
+xarray [2]_ [3]_ は、 pandas を多次元データに拡張したもので、地球科学研究分野から生まれたものです。
 まだ新しいライブラリですが、
 他種類の多次元データを扱うことの多いプラズマ研究でも有用だと思われますので、ここで紹介します。
 
-.. [pandas] https://pandas.pydata.org/
-.. [xarray] https://xarray.pydata.org/
-.. [xarray_paper]_ Hoyer, S. & Hamman, J., (2017).
+.. [1] https://pandas.pydata.org/
+.. [2] https://xarray.pydata.org/
+.. [3] Hoyer, S. & Hamman, J., (2017).
   xarray: N-D labeled Arrays and Datasets in Python. Journal of Open Research Software. 5(1), p.10
 
 
@@ -59,25 +59,28 @@ xarray の使い方
 ここでは、実際のプラズマ実験データを使ってxarray の使い方を説明します。
 核融合科学研究所で計測された トムソン散乱による電子温度・密度の結果を読み込みましょう。
 ファイルの読み込みプログラムやいくつかの計測データの例を
-https://github.com/plasmalib/python_tutorial/data に用意しました。
-これを `data` フォルダに保存して以下のように読み込みましょう。
+https://github.com/plasmalib/python_tutorial/data
+に用意しました。 これを `data` フォルダに保存して以下のように読み込みましょう。
 
 .. ipython:: python
 
   import xarray as xr  # xarray は xr と省略するのが一般的なようです
   import sys
   sys.path.append('data')
-  import eg
+  import eg  # 読み込みプログラムも data/eg.py として保存しておいてください
 
-  thomson = eg.load('data/thomson@120000.dat')  # thomson データの読み込み
+  thomson = eg.load('data/thomson@115500.dat')  # thomson データの読み込み
   print(thomson)
 
 まず、``print`` 文を用いた時の出力が綺麗に整形されていることがわかります。
-``Dimensions`` の行に ``(R: 140, Time: 300)`` とあるのは、
-データは2つの次元 ``Time`` と ``R`` に依存するということを示しています。
+``Dimensions`` の行に ``(R: 140, Time: 246)`` とあるのは、
+含まれる変数は、2つの次元 ``Time`` と ``R`` に依存するということ、
+それらの大きさがそれぞれ140、246であることを示しています。
 ``Coordinates`` セクションには、それら軸の座標の値が表示されています。
 LHDのThomson散乱では、電子温度や密度その推定誤差などが得られますが、それらが
 ``Data variables`` セクションに含まれています。
+``Data variables`` セクションの例えば `Te` の列には `(Time, R)` とありますが、
+これはこの変数が ``Time`` と ``R`` に依存するということを示しています。
 
 各 ``Coordinates`` や ``Data variables`` にアクセスするには、辞書型のように
 ``['Te']`` というようにすることでアクセスできます。
@@ -97,11 +100,11 @@ LHDのThomson散乱では、電子温度や密度その推定誤差などが得�
 
 .. ipython:: python
 
-  thomson.sel(Time=3000.0, method='nearest')
+  thomson.sel(Time=6800.0, method='nearest')
 
-ここでは、 ``Time`` 軸が 3000.0 に最も近い計測値を取得しています。
+ここでは、 ``Time`` 軸が 6800.0 に最も近い計測値を取得しています。
 ``Dimensions`` の行から ``Time`` が消えて ``(R: 140)`` だけになったことからもわかるように、
-全ての計測値をインデクシングしていることがわかります。
+全ての計測値を一度にインデクシングしていることがわかります。
 
 ある時刻の結果だけグラフに描きたい、ということもよくありますが、
 その場合も、 ``.sel`` メソッドを用いることで1行で実現できます。
@@ -109,14 +112,18 @@ LHDのThomson散乱では、電子温度や密度その推定誤差などが得�
 .. ipython:: python
   name: thomson_fig
 
+  plt.plot(thomson['R'], thomson['Te'].sel(Time=6800.0, method='nearest'))
+  plt.xlabel('$R$ (m)')
   @savefig thomson_plot1.png width=4in
-  plt.plot(thomson['R'], thomson['Te'].sel(Time=3000.0, method='nearest'))
+  plt.ylabel('$T_\mathrm{e}$ (eV)')
 
-時刻範囲の選択も容易です。
+範囲の選択も容易です。
 
-.. code-block:: python
+.. ipython:: python
 
-  thomson.sel(Time=slice(4000.0, 5000.0))  # 4000.0 - 5000.0 msの間のデータを選択
+  # R = 3300.0 - 4000.0 間のデータを選択
+  thomson_center = thomson.sel(R=slice(3300.0, 4000.0))
+  thomson_center
 
 
 座標名を利用した操作
@@ -129,7 +136,11 @@ xarray では、軸に名前が付いているので、データが格納され�
 
 .. ipython:: python
 
-  thomson.median(dim='R')  # 'R' 方向の中央値を取ったデータは ''Time'' のみに依存する
+  thomson_center.median(dim='R')  # 'R' 方向の中央値を取ったデータは ''Time'' のみに依存する
+  plt.plot(thomson_center['Time'], thomson_center['Te'].median(dim='R'))
+  plt.xlabel('time (s)')
+  @savefig thomson_plot2.png width=4in
+  plt.ylabel('$T_\mathrm{e}$ (eV)')
 
 
 座標を用いた異種データの結合
@@ -146,7 +157,7 @@ pandas や xarray には簡便な方法が用意されています。
 
 .. ipython:: python
 
-  fir = eg.load('data/fircall@120000.dat')  # thomson データの読み込み
+  fir = eg.load('data/firc@115500.dat')  # thomson データの読み込み
   fir
 
   # thomson の時刻が [ms]なので [s] に修正する。
@@ -164,8 +175,8 @@ pandas や xarray には簡便な方法が用意されています。
 
 xarray は他にも様々な便利機能を備えています。
 
-+ 軸・データの関係を記録する netCDF [netcdf]_ ファイルへの入出力
-+ dask [dask]_ を用いたメモリに格納できない規模のデータの取り扱い、並列計算
++ 軸・データの関係を記録する netCDF [5]_ ファイルへの入出力
++ dask [6]_ を用いたメモリに格納できない規模のデータの取り扱い、並列計算
 
 ここではこれらを説明する紙面の余裕がありませんが、どれも有用な機能となっています。
 xarray の document ページ http://xarray.pydata.org をご参考ください
@@ -178,3 +189,6 @@ xarray の document ページ http://xarray.pydata.org をご参考ください
 最初に使用法を覚える段階はまどろっこしく自身で作った方が早いように感じますが、
 慣れてしまうとこのようなライブラリを用いる方が圧倒的に操作が楽に確実になります。
 有用なツールの習得に時間をかけるのは、ちょっとした投資と言えるかもしれません。
+
+.. [5] https://www.unidata.ucar.edu/software/netcdf/
+.. [6] https://dask.pydata.org/en/latest/

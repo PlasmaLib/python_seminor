@@ -9,7 +9,7 @@
   import sys
   sys.path.append('data')
   import eg
-  thomson = eg.load('data/thomson@120000.dat')  # thomson データの読み込み
+  thomson = eg.load('data/thomson@115500.dat')  # thomson データの読み込み
 
 
 Scikit-learn は Pythonで最も有名な機械学習ライブラリでしょう。
@@ -69,8 +69,7 @@ scikit-learn では様々な手法が利用できますが、ここでは線形�
 :math:`\phi(x)` にどういった式を用いるかで、
 多項式近似や、スプライン近似などを表すことができる汎用的なモデルです。
 scikit-learn では ``linear_model`` モジュールとして提供されています。
-ここでは、前節で紹介したトムソン散乱による電子温度分布（図 [thomson_fig]_ ）
-を複数のガウス関数の和で近似することにします。
+ここでは、前節で紹介したトムソン散乱による電子温度分布を複数のガウス関数の和で近似することにします。
 
 最も簡単な近似法は、最小二乗法です。最小二乗法では、
 
@@ -81,7 +80,7 @@ scikit-learn では ``linear_model`` モジュールとして提供されてい�
 を最小化する :math:`w_j` を求めます。
 このような最小二乗法は、ノイズがガウス分布に従っていると仮定したものです。
 しかし、一般にノイズが綺麗なガウス分布に従っているとは限りません。
-例えば図 [thomson_fig]_ に示した分布も、外れ値と言えるようなデータ点も見受けられます。
+例えば 前節に示したトムソン散乱による電子温度分布も、外れ値と言えるようなデータ点も見受けられます。
 
 このような外れ値（outlier）を含むようなデータの近似アルゴリズムも様々存在します。
 scikit-learn でも複数種類実装されていますが、
@@ -113,50 +112,47 @@ Huber回帰では、通常の最小二乗法と異なり、以下のコスト関
 
  from sklearn import linear_model  # linear_model モジュールを用います
 
- # data ここでは 3000 msに得られた Te の分布を解析する
- Te = thomson.sel(Time=3000, method='nearest')['Te'].values
+ # data ここでは 6800 msに得られた Te の分布を解析します
+ Te = thomson.sel(Time=6800, method='nearest')['Te'].values
  R = thomson['R'].values
 
- # basis R:2500--5000 を10分割した点を中心とするガウス関数の和で近似する
+ # basis R:2500--5000 を10分割した点を中心とするガウス関数の和で近似しましょう
  centers = np.linspace(2500, 5000, 10)
  phi = np.exp(-((R.reshape(-1, 1) - centers) / 200)**2)
 
  # 最小二乗法
  lin = linear_model.LinearRegression(fit_intercept=False)
- # フィッティングを行う
+ # フィッティング
  lin.fit(phi, Te)
- # 求めたフィッティング係数を用いて予測を行う
+ # 求めたフィッティング係数を用いた予測
  Te_lin_fit = lin.predict(phi)
 
  # ロバスト最小二乗法
  rob = linear_model.HuberRegressor(fit_intercept=False)
- # フィッティングを行う
+ # フィッティング
  rob.fit(phi, Te)
- # 求めたフィッティング係数を用いて予測を行う
+ # 求めたフィッティング係数を用いた予測
  Te_rob_fit = rob.predict(phi)
 
  plt.plot(R, Te, '--o', ms=3, label='data')
  plt.plot(R, Te_lin_fit, label='linear regression', lw=2)
  plt.plot(R, Te_rob_fit, label='huber regression', lw=2)
- @savefig thomson_te_fit.png width=4in
  plt.legend(loc='best')  # 凡例を表示する
+ plt.xlabel('$R$ (mm)')  # 凡例を表示する
+ @savefig thomson_te_fit.png width=4in
+ plt.ylabel('$T_\mathrm{e}$ (eV)')  # 凡例を表示する
 
 
 通常の最小二乗法では、
-異常値に引きずられて :math:`R` = 2500 mm 付近、3800 mm 付近で
-多くの計測点から離れているのに対し、
+異常値に引きずられて :math:`R` = 2500 mm 付近で多くの計測点から離れているのに対し、
 Huber回帰ではこれら異常値に頑健なフィッティングができていることがわかります。
 
 また実装面では、``LinearRegression`` と ``HuberRegressor`` は
 引数・戻り値などの使い方が統一されています。
-そのため、``LinearRegression``では外れ値に影響されすぎていると感じれば、
-すぐに``HuberRegressor``などのロバストな回帰手法を試すことができるようになっています。
+そのため、 ``LinearRegression`` では外れ値に影響されすぎていると感じれば、
+すぐに ``HuberRegressor`` などのロバストな回帰手法を試すことができるようになっています。
 他にも様々なアルゴリズムがよく似たインターフェースで提供されており、
 簡単に試行錯誤を重ねることができる、ということがこのようなライブラリを用いることのメリットだと思います。
-
-
-まとめ
----------
 
 この節では、回帰問題を通して scikit-learn の使い方を簡単に紹介しました。
 上記の回帰問題からもわかるように、全てのデータに無条件で合うモデルは存在しません。

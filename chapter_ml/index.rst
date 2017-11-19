@@ -11,3 +11,4 @@ Python を用いたデータ解析
    pandas_xarray.rst
    scikit_learn.rst
    cupy.rst
+   summary.rst
