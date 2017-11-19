@@ -1,0 +1,26 @@
+import numpy as np
+import sys
+sys.path.append('data')
+import eg
+
+thomson = eg.load('data/thomson@120000.dat')
+
+from sklearn import linear_model
+
+# data
+Te = thomson.sel(Time=3000, method='nearest')['Te'].values
+R = thomson['R'].values
+
+# basis
+centers = np.linspace(2500, 5000, 10)
+phi = np.exp(-((R.reshape(-1, 1) - centers) / 200)**2)
+
+# 最小二乗法
+lin = linear_model.LinearRegression(fit_intercept=False)
+lin.fit(phi, Te)
+Te_lin_fit = lin.predict(phi)
+
+# ロバスト最小二乗法
+rob = linear_model.HuberRegressor(fit_intercept=False)
+rob.fit(phi, Te)
+Te_rob_fit = rob.predict(phi)
