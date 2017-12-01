@@ -27,4 +27,13 @@ Numpy の使い方
   :maxdepth: 2
   :caption: Contents:
 
-  chapter3/src/introduction.rst
+  numpy_scipy/preface.rst
+  numpy_scipy/introduction.rst
+  numpy_scipy/numpy_scipy.rst
+  numpy_scipy/numpy_scipy2.rst
+  numpy_scipy/numpy_scipy3.rst
+  numpy_scipy/numpy_scipy4.rst
+  numpy_scipy/numpy_scipy5.rst
+  numpy_scipy/numpy_scipy6.rst
+  numpy_scipy/numpy_scipy7.rst
+  numpy_scipy/numpy_summary.rst
