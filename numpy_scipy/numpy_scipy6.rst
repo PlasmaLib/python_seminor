@@ -24,7 +24,7 @@ for文を使って１から１億までの和を計算する（Python的な書�
 ---------------------------------------------------------------------
 
 .. ipython:: python
-    
+
     def test_for_loop():
         #tick = time.time()
         s = 0
@@ -40,7 +40,7 @@ for文を使って１から１億までの和を計算する（Python的な書�
 ---------------------------------------------------------------------
 
 .. ipython:: python
-    
+
     def test_sum():
         #tick = time.time()
         s = sum(range(1, 100000001))
@@ -61,7 +61,7 @@ NumPyを使い，1から1億が入った配列を用意し，その和を計算�
         #tock = time.time()
         #print('Time of test_numpy_sum: %.06f[s]' % (tock-tick))
         return a.sum()
-    
+
 用意した関数を実行して，計算速度を比較してみましょう．
 今回は以下のような環境で実行時間を計測しました．
 
@@ -80,7 +80,7 @@ NumPyを使い，1から1億が入った配列を用意し，その和を計算�
 まずは計算結果を確認します．
 
 .. ipython:: python
-    
+
     print('Result of test_for_loop: %d' % (test_for_loop()))
     print('Result of test_sum: %d' % (test_sum()))
     print('Result of test_numpy_sum: %d' % (test_numpy_sum()))
@@ -89,8 +89,8 @@ NumPyを使い，1から1億が入った配列を用意し，その和を計算�
 ここでは，それぞれの関数を10回実行し，1回あたりの実行時間を表示しています．
 なお，実行回数を指定するnumberの初期値は100万ですので，時間のかかる処理を初期値のまま行ってしまわないように注意して下さい．
 
-.. ipython:: python
-    
+.. code-block:: python
+
     import timeit
     print('Time of test_for_loop: %.06f[s]' % (timeit.timeit(test_for_loop, number=10)/10))
     print('Time of test_sum: %.06f[s]' % (timeit.timeit(test_sum, number=10)/10))
@@ -110,23 +110,23 @@ x, yを配列または数値として， ``np.where(条件, x, y)`` のように
 .. ipython:: python
 
     cond = np.array([True, True, False, True, False])
-    xarr = np.array([1.0, 1.1, 1.2, 1.3, 1.4]) 
+    xarr = np.array([1.0, 1.1, 1.2, 1.3, 1.4])
     yarr = np.array([2.0, 2.1, 2.2, 2.3, 2.4])
 
 cond, xarr, yarrを上記のように定義します．
 このとき，condの要素がTrueであればxarrの同位置の要素を，Falseであればyarrの同位置の要素を取る処理を考えます．
 これをPythonのリスト内包を用いて書くと次のようになります．
-    
+
 .. ipython:: python
-    
+
     result = [(x if c else y) for x, y, c in zip(xarr, yarr, cond)]
     result
-    
+
 しかし，この方法には，「対象配列が大きくなると動作が遅くなる」，「多次元配列に対応できない」，といった問題があります．
 np.whereを用いることで，これらの問題を解決し，以下のように簡単に記述することができます．
 
 .. ipython:: python
-    
+
     result = np.where(cond, xarr, yarr)
     result
 
@@ -138,11 +138,11 @@ np.whereを使う主な場面は，ある配列を基にして別の配列を作
 この操作は，np.whereを使って以下のように書くことができます．
 
 .. ipython:: python
-    
+
     arr2d = np.random.randn(4, 5)   #4 × 5の乱数データを作成
     arr2d
     np.where(arr2d > 0, 2, arr2d)
-    
+
 np.where関数に配列を渡すとき，同じサイズの1つの配列や1つのスカラー値を渡す以外にも別の方法がありますので，その一例を紹介します．
 2つの真偽値の配列cond1とcond2があるとします．
 このとき，とりうる真偽の組は4種類あります．
@@ -163,15 +163,11 @@ np.where関数に配列を渡すとき，同じサイズの1つの配列や1つ�
             result.append(3)
 
 これをnp.whereを使って書くと次のようになります.
-   
+
 .. code-block:: python
 
     np.where(cond1 & cond2, 0,
-        np.where(cond1, 1, 
+        np.where(cond1, 1,
             np.where(cond2, 2, 3)))
 
 Pythonの処理を高速化するには，ndarrayのユニバーサル関数や演算を用いて可能な限りforループを使わずに基礎的な数値計算を実装することが鍵になります．
-
-
-
-

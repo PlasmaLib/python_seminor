@@ -140,7 +140,8 @@ language = 'ja'
 
 latex_elements = {
     'releasename': '',
-    'papersize': 'a4paper',
+    'papersize': 'a4paper,twocolumn',
+    'pointsize': '9pt',
     'fontpkg': '',
     'fncychap': '',
     'preamble': '''
