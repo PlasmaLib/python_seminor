@@ -36,5 +36,18 @@ Pythonによる科学技術計算
   :numbered: 3
   :caption: Contents:
 
+<<<<<<< HEAD
   chapter3/index.rst
   chapter_ml/index.rst
+=======
+  numpy_scipy/preface.rst
+  numpy_scipy/introduction.rst
+  numpy_scipy/numpy_scipy.rst
+  numpy_scipy/numpy_scipy2.rst
+  numpy_scipy/numpy_scipy3.rst
+  numpy_scipy/numpy_scipy4.rst
+  numpy_scipy/numpy_scipy5.rst
+  numpy_scipy/numpy_scipy6.rst
+  numpy_scipy/numpy_scipy7.rst
+  numpy_scipy/numpy_summary.rst
+>>>>>>> kenmochi
