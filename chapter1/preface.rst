@@ -225,3 +225,6 @@ AnacondaというPythonの実行環境のインストール方法を Windows、L
 また、機械学習を実行するモジュール scikit-learn についても紹介されます。
 三回目では、「Pythonの活用事例」として、
 LHD実験やJT-60SA実験においてどのようにPythonが利用されているかを紹介していただきます。
+
+なお、本記事で紹介するソースコードやデータは、 http://purakaku-python.readthedocs.io
+にもアップロードしています。各自のパソコンでぜひ実行しながらお読みください。

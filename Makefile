@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = jupyter-notebook
+SPHINXPROJ    = Pythonista
 SOURCEDIR     = .
 BUILDDIR      = _build
 
