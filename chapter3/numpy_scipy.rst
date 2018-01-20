@@ -44,8 +44,7 @@ Matplotlibの詳細は次章に譲るとして，ここでは以下のようにM
 
     sampling_time = 1.0e-4
     delay = 0.5
-    sample_length = 4
-    time = np.arange(delay, delay+sample_length, sampling_time, dtype=np.float)
+    time = np.arange(len(IF)) * sampling_time + delay
 
 ここで，時間軸などの生成によく利用することになる ``np.arange`` と ``np.linspace`` の使い方を簡単に紹介します．
 
@@ -102,7 +101,7 @@ NumPyではndarrayで表現した行列に対して，行列の和・積，逆�
 
 .. ipython:: python
 
-    IF -= np.mean(IF[:5000, :], axis=0)
+    IF -= np.mean(IF[:5000], axis=0)
 
 始めに作成した時間軸の配列とともにグラフに表示してみます．
 
@@ -152,7 +151,7 @@ IF_sliceの中身を0に変更してみます．
 この例では，配列IF_sliceはビューですので，元の配列IFに変更が反映されています．
 
 他の配列指向の言語ではスライスのようなデータ片はコピーとして生成する仕様のものが多いため，このインデキシングの仕様に驚く方は多いと思います．
-NumPyの目的の一つは大量データ処理ですが，ビューを生成することで元のndarrayのコピーがメモリ上に作成されないため，大きなデータを保持するndarrayのビューを生成してもメモリの使用量はそのビューを保持する分しか増えないというメリットがあります [#]_ ．
+NumPyの目的の一つは大量データ処理ですが，ビューを生成することで元のndarrayのコピーがメモリ上に作成されないため，大きなデータを保持するndarrayのビューを生成してもメモリの使用量は増えないというメリットがあります [#]_ ．
 
 
 ブロードキャスティング
@@ -199,16 +198,41 @@ SciPyを用いたデータ解析
 .. ipython:: python
 
     import scipy.signal as sig
-    f, t, Pxx = sig.spectrogram(IF[:, 0], fs=1/sampling_time, window='hamming', nperseg=250)
-    @savefig numpy_scipy_fft.png width=4in
-    plt.pcolormesh(t+0.5, f, np.log(np.abs(Pxx) + 1e-15))
-    plt.xlim(1.5, 2.5);
+    f, t, Pxx = sig.spectrogram(IF, fs=1/sampling_time, window='hamming', nperseg=128, noverlap=64, axis=0, mode='complex')
+    plt.pcolormesh(t+0.5, f, np.log(np.abs(Pxx[:, 0]) + 1e-15));
+    plt.xlim(1.5, 3.0);
     plt.xlabel('Time [sec]');
     plt.ylabel('Frequency [Hz]');
+    @savefig numpy_scipy_fft.png width=4in
+    plt.clim(-10, -5)
 
-このように，SciPyを用いることで１行の記述のみでスペクトル解析を行うことができます．
+もう少しノイズを除去するために、2つの干渉計信号のクロススペクトルを計算してみましょう。
+クロススペクトルは、以下の式で計算される量です。
+
+# TODO
+
+.. ipython:: python
+
+    def moving_average(x, N):
+        # Take a moving average along axis=1 with window width N.
+        x = np.pad(x, ((0, 0), (N, 0)), mode='constant')
+        cumsum = np.cumsum(x, axis=1)
+        return (cumsum[:, N:] - cumsum[:, :-N]) / N
+
+    Pxx_run = moving_average(Pxx[:, 0] * np.conj(Pxx[:, 1]), 8)
+    plt.pcolormesh(t+0.5, f, np.log(np.abs(Pxx_run)));
+    plt.xlim(1.5, 3.0);
+    plt.clim(-19, -16);
+    plt.xlabel('Time [sec]');
+    @savefig cross_spectrum.png width=4in
+    plt.ylabel('Frequency [Hz]')
+
+
+このように，SciPyを用いることで１行の記述のみでスペクトル解析を行うことができますし、
+ブロードキャスト、インデキシングとうまく組み合わせることで、クロススペクトルの計算も簡単に行えます。
 SciPyパッケージには科学技術計算のための多様なツールボックスがありますので，プログラムを作る際はルーチンを実装する前に望んでいる処理がSciPyで既に実装されていないか確認してみましょう．
 SciPyで実装済みのルーチンを用いることで最適化された効率の良いデータ処理を行うことができます．
+
 
 解析データの書き込み
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
