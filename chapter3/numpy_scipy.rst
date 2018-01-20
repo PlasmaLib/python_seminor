@@ -11,7 +11,7 @@ NumPyではファイル形式にバイナリとテキストを選びファイル
 
 .. ipython:: python
 
-    IF = np.loadtxt("IF_20170608_74_raw.txt", delimiter=',')
+    IF = np.loadtxt("data/IF_20170608_74_raw.txt", delimiter=',')
 
 NumPyにおけるテキスト形式での読み書きには，以下の特徴があります．
 
@@ -28,12 +28,10 @@ Pythonで広く用いられるグラフ描写ライブラリであるMatplotlib�
 Matplotlibの詳細は次章に譲るとして，ここでは以下のようにMatplotlibを読み込んでおきます．
 
 .. ipython:: python
-    
-    import matplotlib.pyplot as plt
-    plt.plot(IF)
-    plt.show()
 
-.. image:: figure1.png
+    import matplotlib.pyplot as plt
+    @savefig numpy_scipy_IF.png width=4in
+    plt.plot(IF)
 
 
 配列の生成
@@ -43,7 +41,7 @@ Matplotlibの詳細は次章に譲るとして，ここでは以下のようにM
 なお，RT-1のマイクロ波干渉計では，時刻 *t =* 0.5 secから *t =* 4.5 secまで，サンプル周波数10 kHzでデータ収集を行っています．
 
 .. ipython:: python
-    
+
     sampling_time = 1.0e-4
     delay = 0.5
     sample_length = 4
@@ -85,40 +83,39 @@ NumPyではndarrayで表現した行列に対して，行列の和・積，逆�
 今回の例では，まず較正係数を適応して信号値を位相差の値に変換します．
 
 .. ipython:: python
-    
+
     a1 = -0.005
     a2 = 0.000
     b1 = 0.135
     b2 = 0.300
-    
+
     IF[:, 0] = np.arcsin((IF[:, 0]-a1)/b1)*180/np.pi
     IF[:, 1] = np.arcsin((IF[:, 1]-a2)/b2)*180/np.pi
-    
+
 次に，位相差を線積分密度の値に変換します．
 
 .. ipython:: python
-    
+
     IF = IF*5.58/360
 
 最後に，プラズマのない時間帯の値をオフセットとして差し引きます．
 
 .. ipython:: python
-    
+
     IF -= np.mean(IF[:5000, :], axis=0)
 
 始めに作成した時間軸の配列とともにグラフに表示してみます．
 
 .. ipython:: python
-    
-    plt.plot(time, IF[:, 0])
-    plt.plot(time, IF[:, 1])
-    plt.xlim(1.0, 3.0)
-    plt.ylim(0.0, 2.0)
-    plt.xlabel('Time [sec]')
-    plt.ylabel('$\mathbf{n_eL [10^{17}m^{-2}]}$')
-    plt.show()
 
-.. image:: figure2.png
+    plt.plot(time, IF[:, 0]);
+    plt.plot(time, IF[:, 1]);
+    plt.xlim(1.0, 3.0);
+    plt.ylim(0.0, 2.0);
+    plt.xlabel('Time [sec]');
+    @savefig numpy_scipy_IF.png width=4in
+    plt.ylabel('$\mathbf{n_eL [10^{17}m^{-2}]}$')
+
 
 上記で用いた ``IF[:5000, :]`` では， **インデキシング** という処理によりプラズマがない時間帯の2視線の干渉系信号を切り出しています．
 ``[]`` の中身の意味ですが，左側の　``:5000`` で配列IFの第0軸（この場合は時間方向に相当）の先頭から5000番目までの部分を示し，右側の ``:`` では第1軸全体（この場合は2視線の干渉系信号）を示しています．
@@ -143,14 +140,14 @@ NumPyでは，インデキシング（Indexing）という処理により，配�
 
 .. ipython:: python
 
-   IF_slice = IF[:5000, 0] 
+   IF_slice = IF[:5000, 0]
 
 IF_sliceの中身を0に変更してみます．
 
 .. ipython:: python
 
     IF_slice[:] = 0
-    print(IF[:5000, 0])
+    IF[:5000, 0]
 
 この例では，配列IF_sliceはビューですので，元の配列IFに変更が反映されています．
 
@@ -169,7 +166,7 @@ NumPyの目的の一つは大量データ処理ですが，ビューを生成す
 .. ipython:: python
 
     #1から12までの等差数列を作成し，形状を(4, 3)に変更する
-    b = np.arange(1, 13, 1).reshape((4, 3)) 
+    b = np.arange(1, 13, 1).reshape((4, 3))
     b
 
     c = np.array([1, 2, 3])
@@ -200,16 +197,14 @@ SciPyを用いたデータ解析
 今回の例では，SciPyの信号処理に関するサブモジュールscipy.signalの中の関数spectrogramを用いて時間発展スペクトルを調べてみます．
 
 .. ipython:: python
-    
+
     import scipy.signal as sig
     f, t, Pxx = sig.spectrogram(IF[:, 0], fs=1/sampling_time, window='hamming', nperseg=250)
-    plt.pcolormesh(t+0.5, f, np.abs(Pxx), vmin=0, vmax=1e-2)
-    plt.xlim(1.5, 2.5)
-    plt.xlabel('Time [sec]')
-    plt.ylabel('Frequency [Hz]')
-    plt.show()
-
-.. image:: figure4.png
+    @savefig numpy_scipy_fft.png width=4in
+    plt.pcolormesh(t+0.5, f, np.log(np.abs(Pxx) + 1e-15))
+    plt.xlim(1.5, 2.5);
+    plt.xlabel('Time [sec]');
+    plt.ylabel('Frequency [Hz]');
 
 このように，SciPyを用いることで１行の記述のみでスペクトル解析を行うことができます．
 SciPyパッケージには科学技術計算のための多様なツールボックスがありますので，プログラムを作る際はルーチンを実装する前に望んでいる処理がSciPyで既に実装されていないか確認してみましょう．
@@ -232,6 +227,6 @@ SciPyで実装済みのルーチンを用いることで最適化された効率
 ``np.c_`` や ``np.r_`` について更に詳しく知りたい場合は，docstring等を参照して下さい [#]_ ．
 
 .. [RT-1] Z.Yoshida *et al.*, Phys. Plasmas, **17**, 112507 (2010).
-.. [IO] https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.io.html 
+.. [IO] https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.io.html
 .. [#] スライスをndarrayの実コピーとして生成する場合には，明示的に ``arr2d[1, 1:].copy()`` のようにします．
 .. [#] IPythonなどで ``np.r_?`` と呼び出してdocstringを確認することができます．

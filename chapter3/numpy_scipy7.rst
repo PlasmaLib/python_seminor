@@ -15,7 +15,7 @@ odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automat
     :linenos:
 
 .. image:: predator_prey.png
-    
+
 プログラムの内容は以下のようになっています．
 
 #. 解析する関数（この場合predator_prey）を定義する
