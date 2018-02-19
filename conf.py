@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# jupyter-notebook documentation build configuration file, created by
+# pythonista documentation build configuration file, created by
 # sphinx-quickstart on Sat Apr 22 16:07:08 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -69,7 +69,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'jupyter-notebook'
+project = 'pythonista'
 copyright = '2017, Purakaku Python-tutorial editorial committee'
 author = 'Purakaku Python-tutorial editorial committee'
 
@@ -140,8 +140,7 @@ language = 'ja'
 
 latex_elements = {
     'releasename': '',
-    'papersize': 'a4paper,twocolumn',
-    'pointsize': '9pt',
+    'papersize': 'a4paper',
     'fontpkg': '',
     'fncychap': '',
     'preamble': '''
