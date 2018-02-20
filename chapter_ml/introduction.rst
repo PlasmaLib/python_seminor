@@ -1,5 +1,11 @@
+
+**藤井 恵介 Keisuke FUJII**
+
+**京都大学 工学研究科**
+
 概要
 ===============================================
+
 
 データ駆動科学が第４の科学的手法と言われ近年注目を集めています。
 なかでもPythonは、データ科学の分野で最も人気を集めている言語です。
@@ -19,4 +25,9 @@ Tensorflowやchainer、pytorchなど、最新の深層学習ライブラリは�
 様々なアルゴリズムを気軽に試すことが特徴です。
 最後に、高速な GPU 計算を簡単に実現することを目的として開発されている cupy というライブラリを簡単に紹介します。
 
-Keywords: Python, data science, libraries, machine learning, GPU computation 
+なお、今回の記事で紹介する計測データには
+https://github.com/PlasmaLib/python_tutorial/tree/master/data
+からアクセスできます。
+ぜひダウンロードして、各自のPCで操作を体験してみてください。
+
+Keywords: Python, data science, libraries, machine learning, GPU computation
