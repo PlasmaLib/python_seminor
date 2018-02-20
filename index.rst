@@ -7,12 +7,14 @@
 はじめに
 =============================
 
+**Preface**
+
 .. toctree::
   :maxdepth: 3
   :numbered: 3
   :caption: Contents:
 
-  chapter1/preface.rst
+  .. chapter1/preface.rst
 
 =============================
 Pythonスタートアップガイド
@@ -25,7 +27,7 @@ Pythonスタートアップガイド
    :numbered: 3
    :caption: Contents:
 
-   chapter2/index.rst
+   .. chapter2/index.rst
 
 =============================
 Pythonによる科学技術計算
