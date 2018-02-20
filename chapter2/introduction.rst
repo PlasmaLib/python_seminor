@@ -13,7 +13,7 @@ Jupyter-notebook は
 
 元々 Jupyter-notebook は IPython というPythonの対話的プログラム環境の一部の
 IPython-notebookとして開発が進められてきましたが、その有用性が認められ、
-現在はPythonに限らずJulia, R, ruby など他のインタープリタ言語でも利用可能な
+現在はPythonに限らずJulia、 R、 ruby など他のインタープリタ言語でも利用可能な
 汎用ソフトウェアとして開発が続けられています。
 
 上記の特徴は、試行錯誤しながらすすめる研究活動を行うのに効果的なだけでなく、
@@ -22,8 +22,6 @@ IPython-notebookとして開発が進められてきましたが、その有用�
 https://losc.ligo.org/s/events/GW150914/GW150914_tutorial.html
 に Jupyter-notebook 形式で公開されており、
 誰でもその結果を追試することができるようになっています。
-さらにソースコードの実行結果をすぐに可視化できることは、
-プログラムスキルを身に付けるためにも非常に効果的です。
 
 
 ----------------------------------------
@@ -56,7 +54,7 @@ Windowsでの起動
 WindowsからJupyter-notebookを起動するための手順は、以下の通りです。
 
  1. コマンドプロンプトを立ち上げる (必要に応じてディレクトリに移動する)
- 2. 起動コマンド jupyter-notebook を入力する
+ 2. 起動コマンド ``jupyter-notebook`` を入力する
 
 これにより、自動的にブラウザが立ち上がり、Jupyter-notebookのホーム画面が表示されます。
 
@@ -67,7 +65,7 @@ Mac、Linuxでの起動
 Mac, Linuxの場合も同様に
 
  1. ターミナルを立ち上げる (必要に応じて適宜ディレクトリを移動する)
- 2. 起動コマンド jupyter-notebook を入力する
+ 2. 起動コマンド ``jupyter-notebook`` を入力する
 
 上記操作を行うことで、:numref:`try_jupyter` と同様の画面がブラウザに表示されます。
 なお、ブラウザを誤って閉じてしまった場合も、 http://localhost:8888
