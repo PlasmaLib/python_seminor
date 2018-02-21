@@ -38,6 +38,19 @@ extensions = ['IPython.sphinxext.ipython_directive',
               'sphinx.ext.doctest',
               'sphinx.ext.inheritance_diagram',
               ]
+
+try:
+    import sphinx.util.compat
+except ImportError:
+    import sys
+    import types
+    import sphinx.util
+    import docutils.parsers.rst
+    class compat(types.ModuleType):
+        Directive = docutils.parsers.rst.Directive
+    sphinx.util.compat = compat('sphinx.util.compat')
+    sys.modules['sphinx.util.compat'] = sphinx.util.compat
+
 # Determine if the matplotlib has a recent enough version of the
 # plot_directive, otherwise use the local fork.
 try:
