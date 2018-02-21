@@ -31,14 +31,26 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['matplotlib.sphinxext.only_directives',
-              'IPython.sphinxext.ipython_directive',
+extensions = ['IPython.sphinxext.ipython_directive',
               'IPython.sphinxext.ipython_console_highlighting',
               'sphinx.ext.mathjax',
               'sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.inheritance_diagram',
               ]
+
+try:
+    import sphinx.util.compat
+except ImportError:
+    import sys
+    import types
+    import sphinx.util
+    import docutils.parsers.rst
+    class compat(types.ModuleType):
+        Directive = docutils.parsers.rst.Directive
+    sphinx.util.compat = compat('sphinx.util.compat')
+    sys.modules['sphinx.util.compat'] = sphinx.util.compat
+
 # Determine if the matplotlib has a recent enough version of the
 # plot_directive, otherwise use the local fork.
 try:
