@@ -59,7 +59,7 @@ xarray の使い方
 ここでは、実際のプラズマ実験データを使ってxarray の使い方を説明します。
 核融合科学研究所で計測された トムソン散乱による電子温度・密度の結果を読み込みましょう。
 ファイルの読み込みプログラムやいくつかの計測データの例を
-https://github.com/plasmalib/python_tutorial/data
+https://github.com/PlasmaLib/python_tutorial/tree/master/data
 に用意しました。 これを `data` フォルダに保存して以下のように読み込みましょう。
 
 .. ipython:: python
